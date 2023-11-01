@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+#
+#  mongodb:
+#    image: mongo:4.4.15
+#    container_name: mongodb-blog
+#    ports:
+#      - "27017:27017"
+#    # environment:
+#    #   - MONGO_INITDB_ROOT_USERNAME=haininhgl
+#    #   - MONGO_INITDB_ROOT_PASSWORD=
+#    volumes:
+#      - mongodb:/var/lib/db/data/
+#    networks:
+#      mss-dev:
+#        aliases:
+#          - mongodb
+##   blog:
+##     image: blog
+##     depends_on:
+##       - mongodb
+##     ports:
+##       - "8080:8080"
+##     environment:
+##       - SPRING_DATA_MONGODB_PORT=27017
+##       - SPRING_DATA_MONGODB_HOST=mongodb
+##       - SPRING_DATA_MONGODB_USERNAME=haininhgl
+##       - SPRING_DATA_MONGODB_PASSWORD=haininhgl
+##     networks:
+##       - mss-dev
+#
+#networks:
+#  mss-dev:
+#    name: mss-dev
+#
+#volumes:
+#  mongodb:
+
+  postgresql:
+    image: postgres:14.2
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=uaa
+    deploy:
+      replicas: 1
+    ports:
+      - "5432:5432"
+volumes:
+  postgresql_data: {}
